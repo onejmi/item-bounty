@@ -36,8 +36,8 @@ LinksStack.navigationOptions = {
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? `ios-home${focused ? '' : '-outline'}`
-          : 'md-home'
+          ? `ios-qr-scanner-${focused ? '' : '-outline'}`
+          : 'qr-scanner'
       }
     />
   ),
