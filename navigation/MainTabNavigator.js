@@ -36,8 +36,8 @@ LinksStack.navigationOptions = {
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? `ios-qr-scanner-${focused ? '' : '-outline'}`
-          : 'qr-scanner'
+          ? `ios-qr-scanner`
+          : 'md-qr-scanner'
       }
     />
   ),
@@ -48,14 +48,15 @@ const SettingsStack = createStackNavigator({
 });
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+  tabBarLabel: 'Community',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+      name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'}
     />
   ),
 };
+
 
 export default createBottomTabNavigator({
   HomeStack,
