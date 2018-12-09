@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { Alert, Linking, Dimensions, LayoutAnimation, Text, View, StatusBar, StyleSheet, TouchableOpacity } from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo';
+import Database from '../data/database';
 
 let dialogueOpen =  false;
+const database = new Database();
 
 export default class CameraScreen extends Component {
   state = {
     hasCameraPermission: null,
-    lastScannedUrl: null,
+    lastScannedId: null,
   };
 
   componentDidMount() {
@@ -23,7 +25,7 @@ export default class CameraScreen extends Component {
 
   _handleBarCodeRead = result => {
     LayoutAnimation.spring();
-    this.setState({ lastScannedUrl: result.data });
+    this.setState({ lastScannedId: result.data });
   };
 
   render() {
@@ -50,26 +52,31 @@ export default class CameraScreen extends Component {
   }
 
   _handlePressCancel = () => {
-    this.setState({ lastScannedUrl: null });
+    this.setState({ lastScannedId: null });
   };
 
   _maybeRenderUrl = () => {
-    if (!this.state.lastScannedUrl) {
+    if (!this.state.lastScannedId) {
       return;
     }
     else if(!dialogueOpen) {
-    dialogueOpen = true;
-    Alert.alert(
-      'Scanned Item',
-      `Found ID: ${this.state.lastScannedUrl}`,
-      [
-        {text: 'OK', onPress: () => {
-          dialogueOpen = false;
-          }
+      database.connect();
+      database.getName(this.state.lastScannedId).then(name => {
+        if(name.length > 0) {
+          dialogueOpen = true;
+          Alert.alert(
+            'Scanned Item',
+            `Found ID: ${this.state.lastScannedId}`,
+            [
+              {text: 'OK', onPress: () => {
+                dialogueOpen = false;
+                }
+              }
+            ],
+            { cancelable: false }
+          )
         }
-      ],
-      { cancelable: false }
-    )
+      });
   }
 }
 }
