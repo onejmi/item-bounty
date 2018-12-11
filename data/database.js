@@ -30,10 +30,10 @@ export default class Database {
 }
 }
 
-// Initialize Firebase
+// Initialize Firebase (implement credentials below)
 const firebaseConfig = {
-  apiKey: "AIzaSyCuue4nh5Bno3wwRuUfRavJEyPk4nZFfKk",
-  authDomain: "item-bounty-fd3f9.firebaseapp.com",
-  databaseURL: "https://item-bounty-fd3f9.firebaseio.com",
-  storageBucket: "item-bounty-fd3f9.appspot.com"
+  apiKey: "*",
+  authDomain: "*",
+  databaseURL: "*",
+  storageBucket: "*"
 };
