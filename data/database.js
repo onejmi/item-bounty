@@ -6,7 +6,7 @@ export default class Database {
   }
 
   async write() {
-    var users = await firebase.firestore().collection('users/');
+    let users = await firebase.firestore().collection('users/');
     await users.add({"dummy": {
       "data": "test"
     }});
